@@ -8,30 +8,47 @@ public class EmployeeWage {
         Random random = new Random();
         int wagePerHour = 20;
         int fullDayHour = 8;
-        int fullDayWage = wagePerHour*fullDayHour;//Daily wage
+        int fullDayWage = wagePerHour * fullDayHour;//Daily wage
         int partTimeHour = 4;
-        int partTimeWage = wagePerHour*partTimeHour;//Daily wage
-        int absentHour =0;
+        int partTimeWage = wagePerHour * partTimeHour;//Daily wage
+        int absentHour = 0;
         int perMonthWorkingDay = 20;
-        int fullDayCount =0;
-        int partTimeCount = 0;
+        int absentDayCount = 0;
+        int fullDayCount = 0, totalFullDayWorkingHour = 0;
+        int partTimeDayCount = 0, totalPartTimeWorkingHour = 0;
         for (int i = 1; i <= perMonthWorkingDay; i++) {
-            System.out.print(" Day " + i );
+            System.out.print(" Day " + i);
             int a = random.nextInt(3);
             switch (a) {
                 case 0:
                     System.out.println(" Employee is absent than day " + i + " Employee wage is " + absentHour);
+                    absentDayCount++;
                     break;
                 case 1:
-                    System.out.println(" Employee is present for full day " + i + " Employee wage is " + fullDayWage );
+                    System.out.println(" Employee is present for full day " + i + " Employee wage is " + fullDayWage);
                     fullDayCount++;
+                    totalFullDayWorkingHour += fullDayHour;
                     break;
                 default:
                     System.out.println(" Employee is present for Part Time " + i + " Employee wage is " + partTimeWage);
-                    partTimeCount++;
+                    partTimeDayCount++;
+                    totalFullDayWorkingHour += partTimeHour;
 
             }
+            int totalWorkingHour = (totalFullDayWorkingHour + totalPartTimeWorkingHour);
+            int totalDay = (absentDayCount + fullDayCount + partTimeDayCount);
+            if (totalWorkingHour >= 100 ) {
+                System.out.println("Total Employee Wage = " + (100 * 20));
+                System.out.println("Total Working Hour = " + totalWorkingHour);
+                System.out.println("Total Day = " + totalDay);
+                break;
+
+            } else if (totalDay == 20) {
+                System.out.println("Total Employee Wage = " + totalWorkingHour * 20);
+                System.out.println("Total Working Hour = " + totalWorkingHour);
+                System.out.println("Total Day = " + totalDay);
+                break;
+            }
         }
-        System.out.println("Per month wage = "+ ((fullDayCount*fullDayWage)+(partTimeCount*partTimeWage)));
     }
 }
